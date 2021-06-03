@@ -1,0 +1,22 @@
+{
+  "name": "shopping_app",
+  "version": "1.0.0",
+  "description": "MERN Shopping app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chetin4ever/shoping_app.git"
+  },
+  "author": "chetan mahajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chetin4ever/shoping_app/issues"
+  },
+  "homepage": "https://github.com/chetin4ever/shoping_app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
