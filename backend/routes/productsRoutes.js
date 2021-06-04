@@ -1,6 +1,6 @@
 import express from "express"
 import asyncHandler from "express-async-handler"
-import products from "../data/products.js"
+
 import Product from "../models/productsModel.js"
 const router = express.Router()
 export default router
@@ -12,6 +12,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const products = await Product.find({})
+    // throw new Error("something error...")
     res.json(products)
   })
 )
