@@ -3,13 +3,17 @@ import { Link } from "react-router-dom"
 import rating from "../components/Rating"
 import { useDispatch, useSelector } from "react-redux"
 
-import { Row, Col, ListGroup, Card, Button, Image } from "react-bootstrap"
+import { Row, Col, ListGroup, Card, Button, Image, Form } from "react-bootstrap"
 import Rating from "../components/Rating"
 import { listProductsDetials } from "../actions/productActions"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ match, history }) => {
+  const [qty, setQty] = useState(1)
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
+  }
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(listProductsDetials(match.params.id))
@@ -69,11 +73,32 @@ const ProductScreen = ({ match }) => {
                   </Col>
                 </Row>
               </ListGroup.Item>
+              {product.countInStock > 0 && (
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Qty</Col>
+                    <Col>
+                      <Form.Control
+                        as='select'
+                        value={qty}
+                        onChange={(e) => setQty(e.target.value)}
+                      >
+                        {[...Array(product.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
               <ListGroup.Item>
                 <Button
                   className='btn-block'
                   type='button'
                   disabled={!product.countInStock}
+                  onClick={addToCartHandler}
                 >
                   Add to Cart
                 </Button>
